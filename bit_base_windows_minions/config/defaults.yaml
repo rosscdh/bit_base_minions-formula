@@ -1,0 +1,28 @@
+bit_base_windows_minions:
+  users:
+    - username: BienertIT
+      password: password1234
+      groups:
+      - Administrators
+
+  settings:
+    dns_proto: static
+    dns_servers:
+      - 10.0.22.12
+      - 10.0.22.1
+    gateway: 10.0.22.1
+    ntp_servers:
+      - ptbtime1.ptb.de
+      - ptbtime2.ptb.de
+      - ptbtime3.ptb.de
+
+  minion_hosts:
+    bit.lab.ws01.mg:
+      ip_proto: static
+      ip_addrs:
+      - 10.0.22.201
+
+    bit.lab.ws02.mg:
+      ip_proto: static
+      ip_addrs:
+      - 10.0.22.202
