@@ -1,10 +1,4 @@
 bit_base_windows_minions:
-  users:
-    - username: BienertIT
-      password: password1234
-      groups:
-      - Administrators
-
   settings:
     dns_proto: static
     dns_servers:
@@ -15,6 +9,19 @@ bit_base_windows_minions:
       - ptbtime1.ptb.de
       - ptbtime2.ptb.de
       - ptbtime3.ptb.de
+    zabbix:
+      active_host:
+        host: argus.bienert.tech
+        port: 10051
+      passive_host:
+        host: argus.bienert.tech
+        port: 10050
+
+  users:
+    - username: BienertIT
+      password: password1234
+      groups:
+      - Administrators
 
   minion_hosts:
     bit.lab.ws01.mg:

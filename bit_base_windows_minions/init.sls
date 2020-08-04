@@ -7,44 +7,14 @@
 
 {%- if kernel ==  'windows' %}
 
-{%- for user in users %}
-'{{ user.username }}':
-  user.present:
-    - password: {{ user.password }}
-    {%- if user.fullname is defined and user.fullname|length %}
-    - fullname: {{ user.fullname }}
-    {%- endif %}
-    {%- if user.groups is defined and user.groups|length %}
-    - groups: {{ user.groups }}
-    {%- endif %}
-{%- endfor %}
+include:
+- .fw
+- .rdp
+- .users
+- .applications
 
-{%- for user in remove_users %}
-'{{ user.username }}':
-  user.absent
-{%- endfor %}
 
-fw_zabbix:
-  win_firewall.add_rule:
-    - name: Zabbix (10050)
-    - localport: 10050
-    - protocol: tcp
-    - action: allow
 
-fw_rdp:
-  win_firewall.add_rule:
-    - name: RDP (3389)
-    - localport: 3389
-    - protocol: tcp
-    - action: allow
-
-setup-rdp:
-  module.run:
-    {%- if minion_host.rdp_enable is defined %}
-    - name: rdp.enable
-    {%- else %}
-    - name: rdp.disable
-    {%- endif  %}
 
 setup-ntp:
   ntp.managed:
@@ -73,5 +43,3 @@ restart_minion:
 
 {%- endif %}
 
-# include:
-# - applications

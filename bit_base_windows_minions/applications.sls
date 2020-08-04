@@ -1,3 +1,7 @@
+{% from "bit_base_windows_minions/map.jinja" import config with context %}
+{%- set settings = config.settings  %}
+{%- set minion_host = config.minion_hosts.get(grains.id, false) %}
+
 "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))":
   cmd.run:
     - shell: powershell
@@ -18,9 +22,8 @@ windows_zabbix_agent_conf:
     - name: 'C:\ProgramData\zabbix\zabbix_agentd.conf'
     - makedirs: True
     - contents: |
-        {% set win_zabbix =salt['pillar.get']('win_zabbix') %}
-        {% set active_host =salt['pillar.get']('win_zabbix:active_host') %}
-        {% set passive_host =salt['pillar.get']('win_zabbix:passive_host') %}
+        {% set active_host =salt['pillar.get']('bit_base_windows_minions:settings:zabbix:active_host') %}
+        {% set passive_host =salt['pillar.get']('bit_base_windows_minions:settings:zabbix:passive_host') %}
         # This is a configuration file for Zabbix agent service (Windows)
         # To get more information about Zabbix, visit http://www.zabbix.com
     
