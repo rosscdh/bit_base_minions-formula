@@ -22,6 +22,14 @@ bit_base_windows_minions:
       #   params: "/l:de-DE"
       #   package_args: "-f -y"
 
+    zabbix:
+      active_host:
+        host: argus.bienert.tech
+        port: 10051
+      passive_host:
+        host: argus.bienert.tech
+        port: 10050
+
   users: []
 
   minion_hosts: {}

@@ -12,7 +12,7 @@ include:
 - .rdp
 - .ntp
 - .users
-# - .zabbix
+- .zabbix
 - .applications
 - .fw
 - .net_adapter
