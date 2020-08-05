@@ -13,6 +13,7 @@ include:
 - .users
 - .zabbix
 - .applications
+- .fw
 - .net_adapter
 
 {%- endif %}

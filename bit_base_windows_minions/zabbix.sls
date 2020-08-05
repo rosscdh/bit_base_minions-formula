@@ -13,6 +13,7 @@ fw_zabbix_passive:
     - name: Zabbix Passive (10050)
     - localport: 10050
     - protocol: tcp
+    - dir: in
     - action: allow
 
 fw_zabbix_active:
@@ -20,6 +21,7 @@ fw_zabbix_active:
     - name: Zabbix Active (10051)
     - localport: 10051
     - protocol: tcp
+    - dir: out
     - action: allow
 
 InstallZabbixAgent:
