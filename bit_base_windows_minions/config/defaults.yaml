@@ -17,19 +17,6 @@ bit_base_windows_minions:
         host: argus.bienert.tech
         port: 10050
 
-  users:
-    - username: BienertIT
-      password: password1234
-      groups:
-      - Administrators
+  users: []
 
-  minion_hosts:
-    bit.lab.ws01.mg:
-      ip_proto: static
-      ip_addrs:
-      - 10.0.22.201
-
-    bit.lab.ws02.mg:
-      ip_proto: static
-      ip_addrs:
-      - 10.0.22.202
+  minion_hosts: {}

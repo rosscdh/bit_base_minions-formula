@@ -5,7 +5,6 @@
 {%- if minion_host.net_adapter is defined and minion_host.net_adapter|length %}
 '{{ minion_host.net_adapter }}':
   network.managed:
-    - enable_ipv6: false
     - dns_proto: {{ settings.dns_proto | default('dhcp' ) }}
     {%- if settings.dns_servers is defined and settings.dns_servers|length %}
     - dns_servers: {{ settings.dns_servers }}
