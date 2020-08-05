@@ -9,6 +9,15 @@ bit_base_windows_minions:
       - ptbtime1.ptb.de
       - ptbtime2.ptb.de
       - ptbtime3.ptb.de
+    apps:
+      standard_apps: []
+      chocolatey_apps:
+      - name: zabbix-agent
+        params: ""
+        package_args: "-f -y"
+      - name: Firefox
+        params: "/l:de-DE"
+        package_args: "-f -y"
 
   users:
     - username: BienertIT

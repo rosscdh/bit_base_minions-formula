@@ -8,6 +8,7 @@
 {%- if kernel ==  'windows' %}
 
 include:
+- .chocolatey
 - .rdp
 - .ntp
 - .users

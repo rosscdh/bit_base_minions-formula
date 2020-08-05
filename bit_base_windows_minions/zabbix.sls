@@ -2,12 +2,6 @@
 {%- set settings = config.settings  %}
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
 
-"Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))":
-  cmd.run:
-    - shell: powershell
-    - unless:
-      - where chocola*
-
 fw_zabbix_passive:
   win_firewall.add_rule:
     - name: Zabbix Passive (10050)
