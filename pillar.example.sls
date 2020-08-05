@@ -31,4 +31,4 @@ bit_base_windows_minions:
       net_adapter: "Realtek PCIe GBE Family Controller"
       ip_proto: static
       ip_addrs:
-      - 10.0.22.201
+      - 10.0.22.201/24

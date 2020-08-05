@@ -7,17 +7,19 @@
 #
 # Standard
 #
+{%- if settings.apps is defined and settings.apps.standard_apps is defined %}
 install_standard_apps:
   pkg.installed:
   - pkgs:
     {% for app in settings.apps.standard_apps %}
     - {{ app }}
     {% endfor %}
-
+{%- endif %}
 
 #
 # Chocolatey Versions
 #
+{%- if settings.apps is defined and settings.apps.chocolatey_apps is defined %}
 {% for app in settings.apps.chocolatey_apps %}
 'install_{{ app.name }}':
   chocolatey.installed:
@@ -25,3 +27,4 @@ install_standard_apps:
   - package_args: {{ app.params | default('') }}
   - install_args: {{ app.package_args | default('') }}
 {% endfor %}
+{%- endif %}
