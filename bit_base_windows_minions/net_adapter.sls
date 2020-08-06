@@ -3,12 +3,12 @@
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
 
 {%- if minion_host.net_adapter is defined and minion_host.net_adapter|length %}
-install_net_adapter_'{{ grains.server_id }}':
+install_net_adapter_{{ grains.server_id }}:
   cmd.run:
   - name: New-NetIPAddress –IPAddress {{ minion_host.ip_addrs | default('') }} -DefaultGateway {{ settings.gateway }} -PrefixLength 24 -InterfaceIndex (Get-NetAdapter).InterfaceIndex
   - shell: powershell
 
-install_net_adapter_'{{ grains.server_id }}':
+install_dns_{{ grains.server_id }}:
   cmd.run:
   - name: Set-DNSClientServerAddress –InterfaceIndex (Get-NetAdapter).InterfaceIndex –ServerAddresses {{ settings.dns_servers | join(',') }}
   - shell: powershell
@@ -31,5 +31,6 @@ restart_minion:
   cmd.run:
     - name: 'salt-call --local service.restart salt-minion'
     - watch:
-      - cmd: install_net_adapter_'{{ grains.server_id }}'
+      - cmd: install_net_adapter_{{ grains.server_id }}
+      - cmd: install_dns_{{ grains.server_id }}
 {%- endif %}
