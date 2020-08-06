@@ -18,10 +18,10 @@ fw_zabbix_active:
     - dir: out
     - action: allow
 
-InstallZabbixAgent:
-  chocolatey.installed:
-    - name: zabbix-agent
-    - install_args: '/ENABLEPATH:1 /SERVER:argus.bienert.tech /'
+# InstallZabbixAgent:
+#   chocolatey.installed:
+#     - name: zabbix-agent
+#     - install_args: '/ENABLEPATH:1 /SERVER:argus.bienert.tech /'
 
 #remove_old_windows_zabbix_agent_conf:
 #  file.absent:
