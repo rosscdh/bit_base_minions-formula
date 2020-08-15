@@ -1,5 +1,9 @@
 bit_base_windows_minions:
   settings:
+    elasticsearch:
+      - localhost:9200
+    logstash: []
+
     dns_proto: static
     dns_servers:
       - 10.0.22.12

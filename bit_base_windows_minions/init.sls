@@ -16,6 +16,7 @@ include:
 - .applications
 - .fw
 - .net_adapter
+- .winlogbeat
 
 {%- endif %}
 
