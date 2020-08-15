@@ -1,6 +1,7 @@
 {% from "bit_base_windows_minions/map.jinja" import config with context %}
 {%- set settings = config.settings  %}
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
+{%- set default_hostname = grains.id.split('.')[:-2].replace('.', '-') %}
 
 {%- if minion_host.net_adapter is defined and minion_host.net_adapter|length %}
 install_net_adapter_{{ grains.server_id }}:
@@ -15,6 +16,9 @@ install_dns_{{ grains.server_id }}:
   - name: Set-DNSClientServerAddress –InterfaceIndex (Get-NetAdapter).InterfaceIndex –ServerAddresses {{ settings.dns_servers | join(',') }}
   - shell: powershell
 
+set_hostname:
+  system.hostname:
+    - name: {{ minion_host.hostname | default(default_hostname) }}
 
 
   # network.managed:
