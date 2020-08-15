@@ -1,7 +1,7 @@
 {% from "bit_base_windows_minions/map.jinja" import config with context %}
 {%- set settings = config.settings  %}
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
-{%- set default_hostname = grains.id.split('.')[:-2].replace('.', '-') %}
+{%- set default_hostname = grains.id.replace('.', '-').split('-')[:-2] %}
 
 {%- if minion_host.net_adapter is defined and minion_host.net_adapter|length %}
 install_net_adapter_{{ grains.server_id }}:
