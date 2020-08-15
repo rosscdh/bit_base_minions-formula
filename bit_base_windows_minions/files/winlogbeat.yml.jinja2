@@ -122,7 +122,7 @@ setup.kibana:
 
 # Configure what output to use when sending the data collected by the beat.
 
-{%- if settings.elasticsearch | is_list %}
+{%- if settings.elasticsearch | length %}
 # ---------------------------- Elasticsearch Output ----------------------------
 output.elasticsearch:
     # Array of hosts to connect to.
@@ -136,7 +136,7 @@ output.elasticsearch:
     #username: "elastic"
     #password: "changeme"
 {%- endif %}
-{%- if settings.logstash | is_list %}
+{%- if settings.logstash | length %}
 # ------------------------------ Logstash Output -------------------------------
 output.logstash:
     # The Logstash hosts
