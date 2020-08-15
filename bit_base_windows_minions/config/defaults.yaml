@@ -3,6 +3,7 @@ bit_base_windows_minions:
     elasticsearch:
       - localhost:9200
     logstash: []
+    kibana: 10.0.22.173:5601
 
     dns_proto: static
     dns_servers:
