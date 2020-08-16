@@ -1,5 +1,7 @@
-{% set active_host = salt['pillar.get']('bit_base_windows_minions:settings:zabbix:active_host') %}
-{% set passive_host = salt['pillar.get']('bit_base_windows_minions:settings:zabbix:passive_host') %}
+{% from "bit_base_windows_minions/map.jinja" import config with context %}
+{%- set zabbix = config.settings.zabbix  %}
+{%- set active_host = salt['pillar.get']('bit_base_windows_minions:settings:zabbix:active_host') %}
+{%- set passive_host = salt['pillar.get']('bit_base_windows_minions:settings:zabbix:passive_host') %}
 # This is a configuration file for Zabbix agent service (Windows)
 # To get more information about Zabbix, visit http://www.zabbix.com
 
@@ -313,6 +315,9 @@ HostMetadataItem=system.uname
 # Mandatory: yes, if TLS certificate or PSK parameters are defined (even for 'unencrypted' connection)
 # Default:
 # TLSConnect=unencrypted
+{%- if zabbix.psk %}
+TLSConnect=psk
+{%- endif %}
 
 ### Option: TLSAccept
 #    What incoming connections to accept.
@@ -324,6 +329,9 @@ HostMetadataItem=system.uname
 # Mandatory: yes, if TLS certificate or PSK parameters are defined (even for 'unencrypted' connection)
 # Default:
 # TLSAccept=unencrypted
+{%- if zabbix.psk %}
+TLSAccept=psk
+{%- endif %}
 
 ### Option: TLSCAFile
 #    Full pathname of a file containing the top-level CA(s) certificates for
@@ -374,6 +382,9 @@ HostMetadataItem=system.uname
 # Mandatory: no
 # Default:
 # TLSPSKIdentity=
+{%- if zabbix.psk %}
+TLSPSKIdentity={{ zabbix.psk_id }}
+{%- endif %}
 
 ### Option: TLSPSKFile
 #    Full pathname of a file containing the pre-shared key.
@@ -381,3 +392,6 @@ HostMetadataItem=system.uname
 # Mandatory: no
 # Default:
 # TLSPSKFile=
+{%- if zabbix.psk %}
+TLSPSKFile={{ zabbix.psk_file }}
+{%- endif %}
