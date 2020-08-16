@@ -37,7 +37,7 @@ windows_zabbix_agent_psk:
     - makedirs: True
     - template: jinja
     - context:
-      - psk: {{ settings.zabbix.psk }}
+      psk: {{ settings.zabbix.psk }}
     - source:
       - salt://bit_base_windows_minions/files/zabbix_agentd.psk.jinja2
 {%- endif %}
