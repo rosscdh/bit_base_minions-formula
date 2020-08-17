@@ -1,7 +1,11 @@
 ---
 driver:
-  name: vagrant
-  vm_hostname: bit-lab-ws01-mg
+  name: docker
+  use_sudo: false
+  privileged: false
+# driver:
+#   name: vagrant
+#   vm_hostname: bit-lab-ws01-mg
 
 provisioner:
   name: salt_solo
@@ -19,9 +23,12 @@ provisioner:
         - bit_base_windows_minions
 
 platforms:
-  - name: win2012r2-a
-    driver:
-      box: mwrock/Windows2012R2
+- name: debian-dd
+  driver_config:
+    image: debian
+  # - name: win2012r2-a
+  #   driver:
+  #     box: mwrock/Windows2012R2
 
 suites:
   - name: default

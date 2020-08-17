@@ -18,11 +18,6 @@ fw_zabbix_active:
     - dir: out
     - action: allow
 
-# InstallZabbixAgent:
-#   chocolatey.installed:
-#     - name: zabbix-agent
-#     - install_args: '/ENABLEPATH:1 /SERVER:argus.bienert.tech /'
-
 #remove_old_windows_zabbix_agent_conf:
 #  file.absent:
 #    - name: 'C:\ProgramData\zabbix\zabbix_agentd.conf'
@@ -34,7 +29,18 @@ windows_zabbix_agent_conf:
     - template: jinja
     - source:
       - salt://bit_base_windows_minions/files/zabbix.config.jinja2
-        
+
+{%- if settings.zabbix.psk | length and settings.zabbix.psk_file | length %}
+windows_zabbix_agent_psk:
+  file.managed:
+    - name: '{{ settings.zabbix.psk_file }}'
+    - makedirs: True
+    - template: jinja
+    - context:
+      psk: {{ settings.zabbix.psk }}
+    - source:
+      - salt://bit_base_windows_minions/files/zabbix_agentd.psk.jinja2
+{%- endif %}
 
 'Zabbix Agent':
   service.running:
@@ -42,3 +48,6 @@ windows_zabbix_agent_conf:
     - reload: True
     - watch:
       - file: C:\ProgramData\zabbix\zabbix_agentd.conf
+      {%- if settings.zabbix.psk_file | length %}
+      - file: {{ settings.zabbix.psk_file }}
+      {%- endif %}
