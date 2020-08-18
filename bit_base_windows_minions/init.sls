@@ -17,6 +17,7 @@ include:
 - .fw
 - .net_adapter
 - .winlogbeat
+- .packetbeat
 
 {%- endif %}
 
