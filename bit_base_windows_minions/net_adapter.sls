@@ -6,7 +6,7 @@
 {%- if minion_host.net_adapter is defined and minion_host.net_adapter|length %}
 install_net_adapter_{{ grains.server_id }}:
   cmd.run:
-  - name: New-NetIPAddress –IPAddress {{ minion_host.ip_addrs | default('') | join('') }} -DefaultGateway {{ settings.gateway }} -PrefixLength 24 -InterfaceIndex (Get-NetAdapter -Name Ethernet).InterfaceIndex
+  - name: New-NetIPAddress –IPAddress {{ minion_host.ip_addrs | default('') | join('') }} -DefaultGateway {{ settings.gateway }} -PrefixLength 24 -InterfaceIndex (Get-NetAdapter -Name {{ minion_host.net_adapter | default('Ethernet') }}).InterfaceIndex
   - shell: powershell
   - unless:
     - Get-NetIPAddress -IPAddress {{ minion_host.ip_addrs | default('') | join('') }}
