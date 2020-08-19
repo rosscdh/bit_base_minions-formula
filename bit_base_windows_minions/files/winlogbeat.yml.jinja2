@@ -25,6 +25,10 @@ winlogbeat.event_logs:
     - name: Application
       ignore_older: 72h
     - name: System
+    - name: Microsoft-Windows-DriverFrameworks-UserMode/Operational
+    - name: Microsoft-Windows-PrintService/Operational
+    - name: Microsoft-Windows-PrintService/Admin
+    - name: Microsoft-Windows-Ntfs/Operational
     - name: Security
       processors:
           - script:
