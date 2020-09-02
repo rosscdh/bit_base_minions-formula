@@ -18,7 +18,7 @@ install_net_adapter_{{ grains.server_id }}:
     {%- if settings.dns_servers is defined and settings.dns_servers|length %}
     - dns_servers: {{ settings.dns_servers }}
     {%- endif %}
-    {%- if settings.dns_servers is defined and settings.dns_servers|length %}
+    {%- if settings.gateway is defined and settings.gateway|length %}
     - gateway: {{ settings.gateway }}
     {%- endif %}
     - ip_proto: {{ minion_host.ip_proto | default('dhcp' ) }}
