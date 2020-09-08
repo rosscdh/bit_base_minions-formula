@@ -26,10 +26,4 @@ set_hostname_{{ grains.server_id }}:
     - gateway: {{ settings.gateway }}
     {%- endif %}
 
-restart_minion_{{ grains.server_id }}:
-  cmd.run:
-    - name: 'salt-call --local service.restart salt-minion'
-    - watch:
-      - cmd: install_net_adapter_{{ grains.server_id }}
-      - cmd: install_dns_{{ grains.server_id }}
 {%- endif %}
