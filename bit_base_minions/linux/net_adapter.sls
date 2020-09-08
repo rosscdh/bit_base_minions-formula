@@ -8,6 +8,7 @@
 install_net_adapter_{{ grains.server_id }}_{{ ip_addr }}:
   network.managed:
     - enabled: {{ settings.enabled | default(True) }}
+    - name: {{ settings.name | default('eth0') }}
     - type: {{ settings.type | default('eth') }}
     - proto: {{ settings.dns_proto | default('static' ) }}
     - ipaddr: {{ ip_addr }}
