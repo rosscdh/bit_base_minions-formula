@@ -7,9 +7,9 @@
 {%- for ip_addr in minion_host.ip_addrs %}
 install_net_adapter_{{ grains.server_id }}_{{ ip_addr }}:
   network.managed:
-    - enabled: {{ settings.enabled | default(True) }}
-    - name: {{ settings.name | default('eth0') }}
-    - type: {{ settings.type | default('eth') }}
+    - enabled: {{ minion_host.enabled | default(True) }}
+    - name: {{ minion_host.name | default('eth0') }}
+    - type: {{ minion_host.type | default('eth') }}
     - proto: {{ settings.dns_proto | default('static' ) }}
     - ipaddr: {{ ip_addr }}
     - netmask: {{ settings.netmask | default('255.255.255.0' ) }} 
