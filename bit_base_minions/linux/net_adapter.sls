@@ -5,7 +5,7 @@
 
 {%- if minion_host.net_adapter is defined and minion_host.net_adapter|length %}
 {%- for ip_addr in minion_host.ip_addrs %}
-{{ minion_host.name | default('eth0') }}:
+{{ minion_host.net_adapter | default('eth0') }}:
   network.managed:
     - enabled: {{ minion_host.enabled | default(True) }}
     - type: {{ minion_host.type | default('eth') }}
