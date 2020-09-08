@@ -18,11 +18,15 @@ install_net_adapter_{{ grains.server_id }}:
    - ip_proto: {{ minion_host.ip_proto | default('dhcp' ) }}
    - ip_addrs: {{ minion_host.ip_addrs | default('') }}
 
-set_hostname:
-  system.hostname:
-    - name: {{ minion_host.hostname | default(default_hostname) }}
+set_hostname_{{ grains.server_id }}:
+  network.system:
+    - enabled: True
+    - hostname: {{ minion_host.hostname | default(default_hostname) }}
+    {%- if settings.gateway is defined and settings.gateway|length %}
+    - gateway: {{ settings.gateway }}
+    {%- endif %}
 
-restart_minion:
+restart_minion_{{ grains.server_id }}:
   cmd.run:
     - name: 'salt-call --local service.restart salt-minion'
     - watch:
