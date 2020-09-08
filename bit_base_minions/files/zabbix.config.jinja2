@@ -1,8 +1,9 @@
 {% from "bit_base_minions/map.jinja" import config with context %}
 {%- set zabbix = config.settings.zabbix  %}
-{%- set minion_host = config.minion_hosts.get(grains.id, false) %}
 {%- set active_host = salt['pillar.get']('bit_base_minions:settings:zabbix:active_host') %}
 {%- set passive_host = salt['pillar.get']('bit_base_minions:settings:zabbix:passive_host') %}
+{%- set minion_host = config.minion_hosts.get(grains.id, false) %}
+{%- set default_hostname = grains.id.replace('.', '-').split('-')[:-2] %}
 # This is a configuration file for Zabbix agent service (Windows)
 # To get more information about Zabbix, visit http://www.zabbix.com
 
@@ -140,7 +141,7 @@ ServerActive={{ active_host.get('host') }}:{{ active_host.get('port') }}
 #
 # Mandatory: no
 # Default:
-Hostname={{ minion_host.hostname | default(grains.id) }}
+Hostname={{ default_hostname | default(grains.id) }}{%- if config.settings.fqdn and config.settings.fqdn|length %}.{{ config.settings.fqdn }}{%- endif %}
 
 ### Option: HostnameItem
 #    Item used for generating Hostname if it is undefined. Ignored if Hostname is defined.
