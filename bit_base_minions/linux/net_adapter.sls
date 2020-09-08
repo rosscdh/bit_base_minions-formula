@@ -5,10 +5,9 @@
 
 {%- if minion_host.net_adapter is defined and minion_host.net_adapter|length %}
 {%- for ip_addr in minion_host.ip_addrs %}
-install_net_adapter_{{ grains.server_id }}_{{ ip_addr }}:
+{{ minion_host.name | default('eth0') }}:
   network.managed:
     - enabled: {{ minion_host.enabled | default(True) }}
-    - name: {{ minion_host.name | default('eth0') }}
     - type: {{ minion_host.type | default('eth') }}
     - proto: {{ settings.dns_proto | default('static' ) }}
     - ipaddr: {{ ip_addr }}
