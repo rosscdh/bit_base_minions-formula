@@ -1,4 +1,4 @@
-{% from "bit_base_windows_minions/map.jinja" import config with context %}
+{% from "bit_base_minions/map.jinja" import config with context %}
 {%- set settings = config.settings  %}
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
 
@@ -28,7 +28,7 @@ windows_zabbix_agent_conf:
     - makedirs: True
     - template: jinja
     - source:
-      - salt://bit_base_windows_minions/files/zabbix.config.jinja2
+      - salt://bit_base_minions/files/zabbix.config.jinja2
 
 {%- if settings.zabbix.psk | length and settings.zabbix.psk_file | length %}
 windows_zabbix_agent_psk:
@@ -39,7 +39,7 @@ windows_zabbix_agent_psk:
     - context:
       psk: {{ settings.zabbix.psk }}
     - source:
-      - salt://bit_base_windows_minions/files/zabbix_agentd.psk.jinja2
+      - salt://bit_base_minions/files/zabbix_agentd.psk.jinja2
 {%- endif %}
 
 'Zabbix Agent':

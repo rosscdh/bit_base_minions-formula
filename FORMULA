@@ -1,7 +1,7 @@
-name: bit_base_windows_minions
+name: bit_base_minions
 os: CentOS
 os_family: RedHat
 version: 0.0.1
 release: 1
 description: minion configurator
-top_level_dir:  bit_base_windows_minions
+top_level_dir:  bit_base_minions

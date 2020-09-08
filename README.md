@@ -1,4 +1,4 @@
-# bit_base_windows_minions-formula
+# bit_base_minions-formula
 
 minion configurator
 
@@ -8,11 +8,11 @@ minion configurator
 ## Available States
 
 
-# ***bit_base_windows_minions***
+# ***bit_base_minions***
 
 base state
 
-# ***bit_base_windows_minions.wtf***
+# ***bit_base_minions.wtf***
 
 registers minion to saltstack and removes all other repos
 

@@ -1,4 +1,4 @@
-{% from "bit_base_windows_minions/map.jinja" import config with context %}
+{% from "bit_base_minions/map.jinja" import config with context %}
 {%- set users = config.users  %}
 {%- set remove_users = config.get('remove_users', []) %}
 

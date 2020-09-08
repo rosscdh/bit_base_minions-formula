@@ -1,4 +1,4 @@
-{% from "bit_base_windows_minions/map.jinja" import config with context %}
+{% from "bit_base_minions/map.jinja" import config with context %}
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
 
 fw_rdp:

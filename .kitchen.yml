@@ -13,14 +13,14 @@ provisioner:
   require_chef: false
   #pre_salt_command: 'Remove-Item –path C:\Users\vagrant\AppData\Local\Temp\kitchen\var\cache\salt\minion\files\base –recurse'
   install_strategy: always
-  formula: bit_base_windows_minions
+  formula: bit_base_minions
   pillars_from_files:
-    bit_base_windows_minions.sls: pillar.example.sls
+    bit_base_minions.sls: pillar.example.sls
   pillars:
     top.sls:
       base:
         '*':
-        - bit_base_windows_minions
+        - bit_base_minions
 
 platforms:
 - name: debian-dd
@@ -36,7 +36,7 @@ suites:
       state_top:
         base:
           '*':
-          - bit_base_windows_minions
+          - bit_base_minions
 
 verifier:
   name: shell

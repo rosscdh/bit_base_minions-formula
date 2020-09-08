@@ -1,4 +1,4 @@
-bit_base_windows_minions:
+bit_base_minions:
   settings:
     elasticsearch:
       - localhost:9200
