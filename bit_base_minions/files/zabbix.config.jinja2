@@ -10,7 +10,7 @@
 #>>> fd.replace('.','-').split('-')[-1]
 #'bitapp'
 #
-{%- set default_hostname = grains.id.replace('.', '-').split('-')[-1] %}
+{%- set default_hostname = minion_host.hostname | default(grains.id.replace('.', '-').split('-')[-1]) %}
 # This is a configuration file for Zabbix agent service (Windows)
 # To get more information about Zabbix, visit http://www.zabbix.com
 
