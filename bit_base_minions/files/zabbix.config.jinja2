@@ -3,7 +3,14 @@
 {%- set active_host = salt['pillar.get']('bit_base_minions:settings:zabbix:active_host') %}
 {%- set passive_host = salt['pillar.get']('bit_base_minions:settings:zabbix:passive_host') %}
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
-{%- set default_hostname = grains.id.replace('.', '-').split('-')[:-2] %}
+#
+# >>> fd='pro.mg.sophienstrasse.bienert.bitapp'
+#>>> fd.replace('.','-').split('-')
+#['pro', 'mg', 'sophienstrasse', 'bienert', 'bitapp']
+#>>> fd.replace('.','-').split('-')[-1]
+#'bitapp'
+#
+{%- set default_hostname = grains.id.replace('.', '-').split('-')[-1] %}
 # This is a configuration file for Zabbix agent service (Windows)
 # To get more information about Zabbix, visit http://www.zabbix.com
 
