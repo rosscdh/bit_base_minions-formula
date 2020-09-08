@@ -11,6 +11,20 @@ install_net_adapter_{{ grains.server_id }}:
   - unless:
     - Get-NetIPAddress -IPAddress {{ minion_host.ip_addrs | default('') | join('') }}
 
+# https://github.com/saltstack/salt/issues/58361
+#install_net_adapter_{{ grains.server_id }}:
+#  network.managed:
+#    - name: '{{ minion_host.net_adapter }}'
+#    - dns_proto: {{ settings.dns_proto | default('dhcp' ) }}
+#    {%- if settings.dns_servers is defined and settings.dns_servers|length %}
+#    - dns_servers: {{ settings.dns_servers }}
+#    {%- endif %}
+#    {%- if settings.gateway is defined and settings.gateway|length %}
+#    - gateway: {{ settings.gateway }}
+#    {%- endif %}
+#    - ip_proto: {{ minion_host.ip_proto | default('dhcp' ) }}
+#    - ip_addrs: {{ minion_host.ip_addrs | default('') }}
+
 install_dns_{{ grains.server_id }}:
   cmd.run:
   - name: Set-DNSClientServerAddress –InterfaceIndex (Get-NetAdapter).InterfaceIndex –ServerAddresses {{ settings.dns_servers | join(',') }}
@@ -19,19 +33,6 @@ install_dns_{{ grains.server_id }}:
 set_hostname:
   system.hostname:
     - name: {{ minion_host.hostname | default(default_hostname) }}
-
-
-  # network.managed:
-  #   - name: '{{ minion_host.net_adapter }}'
-  #   - dns_proto: {{ settings.dns_proto | default('dhcp' ) }}
-  #   {%- if settings.dns_servers is defined and settings.dns_servers|length %}
-  #   - dns_servers: {{ settings.dns_servers }}
-  #   {%- endif %}
-  #   {%- if settings.dns_servers is defined and settings.dns_servers|length %}
-  #   - gateway: {{ settings.gateway }}
-  #   {%- endif %}
-  #   - ip_proto: {{ minion_host.ip_proto | default('dhcp' ) }}
-  #   - ip_addrs: {{ minion_host.ip_addrs | default('') }}
 
 restart_minion:
   cmd.run:
