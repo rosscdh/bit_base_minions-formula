@@ -15,8 +15,10 @@ include:
 - .windows.applications
 - .windows.fw
 - .windows.net_adapter
-- .windows.winlogbeat
-- .windows.packetbeat
+# install these specifically by including in top file
+# they eat disk space and cpu
+#- .windows.winlogbeat
+#- .windows.packetbeat
 - .windows.update_inventory
 {%- endif %}
 
