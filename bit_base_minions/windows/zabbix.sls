@@ -33,7 +33,7 @@ windows_zabbix_agent_conf:
 {%- if settings.zabbix.psk | length %}
 windows_zabbix_agent_psk:
   file.managed:
-    - name: '{{ settings.zabbix.windows.get('psk_file') | default("C:\ProgramData\zabbix\zabbix_agentd.psk") }}'
+    - name: '{{ settings.zabbix.get('windows', {}).get("psk_file", "C:\ProgramData\zabbix\zabbix_agentd.psk") }}'
     - makedirs: True
     - template: jinja
     - context:
