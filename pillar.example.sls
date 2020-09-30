@@ -3,6 +3,7 @@ bit_base_minions:
     elasticsearch:
       - localhost:9200
     logstash: []
+    fqdn: pro.i.bienert.tech
     dns_proto: static
     dns_servers:
       - 10.0.22.12
@@ -29,8 +30,10 @@ bit_base_minions:
       - Administrators
 
   minion_hosts:
+    # windows
     "bit-lab-ws01-mg":
       rdp_enable: "true"
+      hostname: ws01
       net_adapter: "Realtek PCIe GBE Family Controller"
       ip_proto: static
       ip_addrs:

@@ -4,27 +4,33 @@
 {%- set default_hostname = grains.id.replace('.', '-').split('-')[:-2] %}
 
 {%- if minion_host.net_adapter is defined and minion_host.net_adapter|length %}
-install_net_adapter_{{ grains.server_id }}:
- network.managed:
-   - name: '{{ minion_host.net_adapter }}'
-   - dns_proto: {{ settings.dns_proto | default('dhcp' ) }}
-   {%- if settings.dns_servers is defined and settings.dns_servers|length %}
-   - dns_servers: {{ settings.dns_servers }}
-   {%- endif %}
-   {%- if settings.gateway is defined and settings.gateway|length %}
-   - gateway: {{ settings.gateway }}
-   {%- endif %}
-   - ip_proto: {{ minion_host.ip_proto | default('dhcp' ) }}
-   - ip_addrs: {{ minion_host.ip_addrs | default('') }}
+{%- for ip_addr in minion_host.ip_addrs %}
+{{ minion_host.net_adapter | default('eth0') }}:
+  network.managed:
+    - enabled: {{ minion_host.enabled | default(True) }}
+    - type: {{ minion_host.type | default('eth') }}
+    - proto: {{ settings.dns_proto | default('static' ) }}
+    - ipaddr: {{ ip_addr }}
+    - netmask: {{ settings.netmask | default('255.255.255.0' ) }} 
+    {%- if settings.gateway is defined and settings.gateway|length %}
+    - gateway: {{ settings.gateway }}
+    {%- endif %}
+    - enable_ipv6: false
+    #- ipv6proto: static
+    #- ipv6ipaddrs:
+    #  - 2001:db8:dead:beef::3/64
+    #- ipv6gateway: 2001:db8:dead:beef::1
+    #- ipv6netmask: 64
+    - dns: {{ settings.dns_servers }}
+{%- endfor %}
 
-set_hostname:
-  system.hostname:
-    - name: {{ minion_host.hostname | default(default_hostname) }}
 
-restart_minion:
-  cmd.run:
-    - name: 'salt-call --local service.restart salt-minion'
-    - watch:
-      - cmd: install_net_adapter_{{ grains.server_id }}
-      - cmd: install_dns_{{ grains.server_id }}
+set_hostname_{{ grains.server_id }}:
+  network.system:
+    - enabled: True
+    - hostname: {{ minion_host.hostname | default(default_hostname) }}
+    {%- if settings.gateway is defined and settings.gateway|length %}
+    - gateway: {{ settings.gateway }}
+    {%- endif %}
+
 {%- endif %}

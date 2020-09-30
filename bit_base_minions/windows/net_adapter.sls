@@ -33,11 +33,4 @@ install_dns_{{ grains.server_id }}:
 set_hostname:
   system.hostname:
     - name: {{ minion_host.hostname | default(default_hostname) }}
-
-restart_minion:
-  cmd.run:
-    - name: 'salt-call --local service.restart salt-minion'
-    - watch:
-      - cmd: install_net_adapter_{{ grains.server_id }}
-      - cmd: install_dns_{{ grains.server_id }}
 {%- endif %}
