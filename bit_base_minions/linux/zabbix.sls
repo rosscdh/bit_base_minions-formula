@@ -2,7 +2,7 @@
 {%- set settings = config.settings  %}
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
 
-{%- if settings.zabbix.psk | length and settings.zabbix.psk_file | length %}
+{%- if settings.zabbix.psk | length %}
 zabbix_psk:
   file.managed:
     - name: '{{ settings.zabbix.linux.psk_file | default("/etc/zabbix/zabbix_agentd.psk") }}'

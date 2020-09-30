@@ -30,7 +30,7 @@ windows_zabbix_agent_conf:
     - source:
       - salt://bit_base_minions/files/zabbix.config.jinja2
 
-{%- if settings.zabbix.psk | length and settings.zabbix.psk_file | length %}
+{%- if settings.zabbix.psk | length %}
 windows_zabbix_agent_psk:
   file.managed:
     - name: '{{ settings.zabbix.windows.psk_file | default("C:\ProgramData\zabbix\zabbix_agentd.psk") }}'
