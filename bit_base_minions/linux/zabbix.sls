@@ -1,11 +1,13 @@
 {% from "bit_base_minions/map.jinja" import config with context %}
 {%- set settings = config.settings  %}
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
+{%- set psk_file = settings.zabbix.get("linux", {}).get("psk_file", "/etc/zabbix/zabbix_agentd.psk") %}
+
 
 {%- if settings.zabbix.psk | length %}
 zabbix_psk:
   file.managed:
-    - name: '{{ settings.zabbix.get("linux", {}).get("psk_file", "/etc/zabbix/zabbix_agentd.psk") }}'
+    - name: '{{ psk_file }}'
     - makedirs: True
     - template: jinja
     - context:
@@ -21,5 +23,5 @@ liunux-zabbix-agent:
     - reload: True
     - watch:
       {%- if settings.zabbix.psk | length %}
-      - file: {{ settings.zabbix.psk_file }}
+      - file: {{ psk_file }}
       {%- endif %}
