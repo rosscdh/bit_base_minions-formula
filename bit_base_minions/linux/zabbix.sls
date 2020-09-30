@@ -14,14 +14,13 @@ zabbix_psk:
       psk: {{ settings.zabbix.psk }}
     - source:
       - salt://bit_base_minions/files/zabbix_agentd.psk.jinja2
-{%- endif %}
 
-liunux-zabbix-agent:
+linux-restart-zabbix-agent:
   service.running:
     - name: zabbix-agent
     - enable: True
     - reload: True
     - watch:
-      {%- if settings.zabbix.psk | length %}
+      - file: /etc/zabbix/zabbix_agentd.conf
       - file: {{ psk_file }}
-      {%- endif %}
+{%- endif %}

@@ -41,14 +41,13 @@ windows_zabbix_agent_psk:
       psk: {{ settings.zabbix.psk }}
     - source:
       - salt://bit_base_minions/files/zabbix_agentd.psk.jinja2
-{%- endif %}
 
-'Zabbix Agent':
+windows-retsart-zabbix-agent:
   service.running:
+    - name: 'Zabbix Agent'
     - enable: True
     - reload: True
     - watch:
       - file: C:\ProgramData\zabbix\zabbix_agentd.conf
-      {%- if settings.zabbix.psk | length %}
       - file: {{ psk_file }}
-      {%- endif %}
+{%- endif %}
