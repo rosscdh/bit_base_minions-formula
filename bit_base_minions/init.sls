@@ -25,5 +25,6 @@ include:
 {%- if kernel ==  'linux' %}
 include:
 - .linux.net_adapter
+- .linux.zabbix
 {%- endif %}
 
