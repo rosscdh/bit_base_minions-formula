@@ -14,8 +14,9 @@ zabbix_psk:
       - salt://bit_base_minions/files/zabbix_agentd.psk.jinja2
 {%- endif %}
 
-zabbix-agent:
+liunux-zabbix-agent:
   service.running:
+    - name: zabbix-agent
     - enable: True
     - reload: True
     - watch:
