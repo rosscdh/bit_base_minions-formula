@@ -19,17 +19,17 @@ bit_base_minions:
 
     apps:
       standard_apps: []
-      chocolatey_apps: []
-      # - name: zabbix-agent
-      #   params: ""
-      #   package_args: "-f -y"
+      chocolatey_apps:
+      - name: zabbix-agent
+        params: ""
+        package_args: "-f -y"
       # - name: Firefox
       #   params: "/l:de-DE"
       #   package_args: "-f -y"
 
     zabbix:
-      psk_id: pxs-gregor
-      psk: 1234................................5678
+      psk_id: psk-id-generic
+      #psk: 1234................................5678
       windows:
         psk_file: C:\ProgramData\zabbix\zabbix_agentd.psk
       linux:

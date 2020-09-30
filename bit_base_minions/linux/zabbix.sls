@@ -20,6 +20,6 @@ liunux-zabbix-agent:
     - enable: True
     - reload: True
     - watch:
-      {%- if settings.zabbix.psk_file | length %}
+      {%- if settings.zabbix.psk | length %}
       - file: {{ settings.zabbix.psk_file }}
       {%- endif %}

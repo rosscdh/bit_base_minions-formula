@@ -48,6 +48,6 @@ windows_zabbix_agent_psk:
     - reload: True
     - watch:
       - file: C:\ProgramData\zabbix\zabbix_agentd.conf
-      {%- if settings.zabbix.psk_file | length %}
+      {%- if settings.zabbix.psk | length %}
       - file: {{ settings.zabbix.psk_file }}
       {%- endif %}
