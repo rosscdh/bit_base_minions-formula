@@ -21,6 +21,5 @@ linux-restart-zabbix-agent:
     - enable: True
     - reload: True
     - watch:
-      - file: /etc/zabbix/zabbix_agentd.conf
       - file: {{ psk_file }}
 {%- endif %}

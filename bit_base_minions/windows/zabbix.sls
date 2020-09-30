@@ -48,6 +48,5 @@ windows-retsart-zabbix-agent:
     - enable: True
     - reload: True
     - watch:
-      - file: C:\ProgramData\zabbix\zabbix_agentd.conf
       - file: {{ psk_file }}
 {%- endif %}
