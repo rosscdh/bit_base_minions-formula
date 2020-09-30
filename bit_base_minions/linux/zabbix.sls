@@ -3,7 +3,7 @@
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
 
 {%- if settings.zabbix.psk | length and settings.zabbix.psk_file | length %}
-windows_zabbix_agent_psk:
+zabbix_psk:
   file.managed:
     - name: '{{ settings.zabbix.psk_file }}'
     - makedirs: True
