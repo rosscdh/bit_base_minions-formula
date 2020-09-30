@@ -28,6 +28,12 @@ bit_base_minions:
       #   package_args: "-f -y"
 
     zabbix:
+      psk_id: pxs-gregor
+      psk: 1234................................5678
+      windows:
+        psk_file: C:\ProgramData\zabbix\zabbix_agentd.psk
+      linux:
+        psk_file: /etc/zabbix/zabbix_agentd.psk
       active_host:
         host: argus.bienert.tech
         port: 10051

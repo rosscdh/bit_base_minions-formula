@@ -5,7 +5,7 @@
 {%- if settings.zabbix.psk | length and settings.zabbix.psk_file | length %}
 zabbix_psk:
   file.managed:
-    - name: '{{ settings.zabbix.psk_file }}'
+    - name: '{{ settings.zabbix.linux.psk_file | default("/etc/zabbix/zabbix_agentd.psk") }}'
     - makedirs: True
     - template: jinja
     - context:
