@@ -19,12 +19,13 @@ include:
 # they eat disk space and cpu
 #- .windows.winlogbeat
 #- .windows.packetbeat
-- .windows.update_inventory
+- .update_inventory
 {%- endif %}
 
 {%- if kernel ==  'linux' %}
 include:
 - .linux.net_adapter
 - .linux.zabbix
+- .update_inventory
 {%- endif %}
 
