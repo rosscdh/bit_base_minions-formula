@@ -1,4 +1,8 @@
 bit_base_minions:
+  zabbix:
+    host_groups:
+      - default
+
   settings:
     elasticsearch:
       - localhost:9200
