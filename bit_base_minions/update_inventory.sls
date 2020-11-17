@@ -7,7 +7,7 @@ update_minion_inventory:
     - name: bit/inventory/update
     - data:
       minion_host: "{{ minion_host }}"
-      ip_address: "{{ salt['network.ip_addrs']() | first | default([]) }}"
+      ip_address: "{{ minion_host.ip_addrs | first }}"
       client_name: "{{ salt['grains.get']('client_name', 'client_name not in grains') }}"
       zabbix_proxy: "{{ salt['pillar.get']('zabbix-agent:proxy', {}) }}"
       inventory: [
