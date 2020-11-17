@@ -26,6 +26,6 @@ include:
 include:
 - .linux.net_adapter
 - .linux.zabbix
-- .update_inventory
+#- .update_inventory # call manually
 {%- endif %}
 
