@@ -1,7 +1,7 @@
 {% from "bit_base_minions/map.jinja" import config with context %}
 {%- set settings = config.settings  %}
 {%- set minion_host = config.minion_hosts.get(grains.id, false) %}
-{%- set psk_file = settings.zabbix.get("linux", {}).get("psk_file", "C:\ProgramData\zabbix\zabbix_agentd.psk") %}
+{%- set psk_file = settings.zabbix.get("windows", {}).get("psk_file", "C:\ProgramData\zabbix\zabbix_agentd.psk") %}
 
 fw_zabbix_passive:
   win_firewall.add_rule:
