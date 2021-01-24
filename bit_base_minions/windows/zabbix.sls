@@ -39,6 +39,7 @@ windows_zabbix_agent_psk:
     - template: jinja
     - context:
       psk: {{ settings.zabbix.psk }}
+      psk_file: {{ settings.zabbix.windows.psk_file }}
     - source:
       - salt://bit_base_minions/files/zabbix_agentd.psk.jinja2
 
