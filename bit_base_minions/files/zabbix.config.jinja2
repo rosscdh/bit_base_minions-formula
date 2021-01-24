@@ -402,7 +402,7 @@ TLSPSKIdentity={{ zabbix.psk_id }}
 # Default:
 # TLSPSKFile=
 {%- if zabbix.psk %}
-{%- if kernel ==  'windows' %}
+{%- if grains.kernel ==  'windows' %}
 TLSPSKFile={{ zabbix.windows.psk_file }}
 {%- else %}
 TLSPSKFile={{ zabbix.linux.psk_file }}
