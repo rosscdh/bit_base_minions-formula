@@ -148,7 +148,7 @@ ServerActive={{ minion_host.get('active_host', active_host.get('host')) }}:{{ mi
 #
 # Mandatory: no
 # Default:
-Hostname={{ default_hostname | default(grains.id) }}{%- if config.settings.fqdn and config.settings.fqdn|length %}.{{ config.settings.fqdn }}{%- endif %}
+Hostname={{ default_hostname | default(grains.id) | lower }}{%- if config.settings.fqdn and config.settings.fqdn|length %}.{{ config.settings.fqdn }}{%- endif %}
 
 ### Option: HostnameItem
 #    Item used for generating Hostname if it is undefined. Ignored if Hostname is defined.
