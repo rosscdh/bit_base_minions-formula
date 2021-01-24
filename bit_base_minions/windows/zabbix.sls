@@ -49,4 +49,5 @@ windows-retsart-zabbix-agent:
     - reload: True
     - watch:
       - file: {{ psk_file }}
+      - windows_zabbix_agent_conf
 {%- endif %}
