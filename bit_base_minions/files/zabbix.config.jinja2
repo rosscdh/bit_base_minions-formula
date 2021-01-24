@@ -401,6 +401,6 @@ TLSPSKIdentity={{ zabbix.psk_id }}
 # Mandatory: no
 # Default:
 # TLSPSKFile=
-{%- if zabbix.psk %}
-TLSPSKFile={{ zabbix.psk_file }}
+{%- if zabbix.psk and psk_file %}
+TLSPSKFile={{ psk_file }}
 {%- endif %}
