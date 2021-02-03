@@ -42,6 +42,7 @@ windows_zabbix_agent_psk:
       psk_file: {{ settings.zabbix.windows.psk_file }}
     - source:
       - salt://bit_base_minions/files/zabbix_agentd.psk.jinja2
+{%- endif %}
 
 windows-retsart-zabbix-agent:
   service.running:
@@ -51,4 +52,4 @@ windows-retsart-zabbix-agent:
     - watch:
       - file: {{ psk_file }}
       - windows_zabbix_agent_conf
-{%- endif %}
+
