@@ -2,7 +2,9 @@
 # Install Chocolatey
 #
 b_b_m_install_chocolatey:
-  chocolatey.bootstrap: []
+  chocolatey.bootstrap:
+    - unless:
+      - where choco*
 
 #bit_base_minions_install_chocolatey:
 #  cmd.run:
