@@ -54,7 +54,7 @@ windows-retsart-zabbix-agent:
       - windows_zabbix_agent_conf
 
 
-{%- if config.zabbix._connection_url %}
+{%- if settings.zabbix._connection_url %}
 update_zabbix:
   zabbix_host.present:
     - _connection_user: {{ settings.zabbix._connection_user }}
