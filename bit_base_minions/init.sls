@@ -15,10 +15,6 @@ include:
 - .windows.applications
 - .windows.fw
 - .windows.net_adapter
-# install these specifically by including in top file
-# they eat disk space and cpu
-#- .windows.winlogbeat
-#- .windows.packetbeat
 - .update_inventory
 {%- endif %}
 
@@ -26,6 +22,6 @@ include:
 include:
 - .linux.net_adapter
 - .linux.zabbix
-#- .update_inventory # call manually
+- .update_inventory
 {%- endif %}
 
