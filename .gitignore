@@ -40,3 +40,6 @@ Gemfile.lock
 .venv
 .bundle
 vendor
+
+#reports
+reports/*

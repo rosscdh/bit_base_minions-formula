@@ -23,3 +23,4 @@ linux-restart-zabbix-agent:
     - watch:
       - file: {{ psk_file }}
 {%- endif %}
+
